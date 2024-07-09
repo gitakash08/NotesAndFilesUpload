@@ -1,0 +1,49 @@
+USE [master]
+GO
+
+/****** Object:  LinkedServer [ML_ORG]    Script Date: 28-06-2024 12:47:40 ******/
+EXEC master.dbo.sp_addlinkedserver @server = N'ML_ORG', @srvproduct=N'', @provider=N'SQLNCLI', @datasrc=N'mlinfomap.org', @catalog=N'master'
+ /* For security reasons the linked server remote logins password is changed with ######## */
+EXEC master.dbo.sp_addlinkedsrvlogin @rmtsrvname=N'ML_ORG',@useself=N'False',@locallogin=NULL,@rmtuser=N'sa',@rmtpassword='server@ml2014'
+GO
+
+EXEC master.dbo.sp_serveroption @server=N'ML_ORG', @optname=N'collation compatible', @optvalue=N'false'
+GO
+
+EXEC master.dbo.sp_serveroption @server=N'ML_ORG', @optname=N'data access', @optvalue=N'true'
+GO
+
+EXEC master.dbo.sp_serveroption @server=N'ML_ORG', @optname=N'dist', @optvalue=N'false'
+GO
+
+EXEC master.dbo.sp_serveroption @server=N'ML_ORG', @optname=N'pub', @optvalue=N'false'
+GO
+
+EXEC master.dbo.sp_serveroption @server=N'ML_ORG', @optname=N'rpc', @optvalue=N'false'
+GO
+
+EXEC master.dbo.sp_serveroption @server=N'ML_ORG', @optname=N'rpc out', @optvalue=N'false'
+GO
+
+EXEC master.dbo.sp_serveroption @server=N'ML_ORG', @optname=N'sub', @optvalue=N'false'
+GO
+
+EXEC master.dbo.sp_serveroption @server=N'ML_ORG', @optname=N'connect timeout', @optvalue=N'0'
+GO
+
+EXEC master.dbo.sp_serveroption @server=N'ML_ORG', @optname=N'collation name', @optvalue=null
+GO
+
+EXEC master.dbo.sp_serveroption @server=N'ML_ORG', @optname=N'lazy schema validation', @optvalue=N'false'
+GO
+
+EXEC master.dbo.sp_serveroption @server=N'ML_ORG', @optname=N'query timeout', @optvalue=N'0'
+GO
+
+EXEC master.dbo.sp_serveroption @server=N'ML_ORG', @optname=N'use remote collation', @optvalue=N'true'
+GO
+
+EXEC master.dbo.sp_serveroption @server=N'ML_ORG', @optname=N'remote proc transaction promotion', @optvalue=N'true'
+GO
+
+
