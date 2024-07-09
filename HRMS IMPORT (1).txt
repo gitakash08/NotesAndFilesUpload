@@ -1,0 +1,25 @@
+ DELETE FROM [MLIMDB].[dbo].[LoginRecord]
+  WHERE logintime
+  >'2024-05-15 09:36:39.283' -- DELETE RECORD SINCE LAST IMPORT
+
+INSERT INTO [EMP_DB].MLIMDB.DBO.[LoginRecord] (
+[username]
+      ,[logintime]
+      ,[fullName]
+      ,[empid]
+      ,[logoutTime]
+)
+
+
+SELECT LM.EmpId,MIN(LoginDateTime),L.EmpName,NULL,NULL FROM LoginHistory L
+JOIN LOGINMASTER LM ON L.EmpName=LM.EmpName
+WHERE LoginDateTime>'2024-05-15 09:36:39.283' 
+GROUP BY LM.EmpId,L.EmpName,CAST(LoginDateTime AS DATE)
+
+
+UPDATE L
+SET empid=U.empid
+FROM LoginRecord L
+JOIN Users U 
+ON L.username=U.username
+WHERE logintime>'2024-05-15 09:36:39.283'
